@@ -10,11 +10,8 @@ public class UserService {
     @Autowired
     UserDao userDao;
     public User queryUserById(Long id){
-      User user=  userDao.selectByPrimaryKey(id);
-      user.setId(1L);
-      user.setName("DL");
-      user.setUserName("dl1234");
-      user.setPassWord("111111");
+      User user=  userDao.queryById(id);
+
         return user;
     }
 }

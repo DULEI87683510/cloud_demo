@@ -10,7 +10,7 @@ import user.service.UserService;
 public class UserController {
     @Autowired
     private UserService userService;
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public User getUserById(@PathVariable("id") Long id){
 
     return userService.queryUserById(id);

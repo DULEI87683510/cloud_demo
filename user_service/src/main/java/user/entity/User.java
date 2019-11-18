@@ -1,10 +1,11 @@
 package user.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import java.io.Serializable;
+
+
+@Entity
 @Table(name = "tb_user")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -17,14 +18,17 @@ public class User implements Serializable {
     /**
      * 用户名
      */
+    @Column(name="user_name")
     private String userName;
     /**
      * 名字
      */
+    @Column(name="name")
     private String name;
     /**
      * 密码
      */
+    @Column(name="pass_word")
     private String passWord;
 
     public Long getId() {
