@@ -27,15 +27,9 @@ public class Uservice {
     private DiscoveryClient discoveryClient;
 
     public String getUserById(Long id){
-        // 根据服务名称，获取服务实例
-        List<ServiceInstance> instances = discoveryClient.getInstances("user_service");
-        if (instances.isEmpty()){
-            throw new RuntimeException("获取的服务实例为空");
-        }
-        ServiceInstance serviceInstance=  instances.get(0);
-        // 获取ip和端口信息
-        String baseUrl = "http://"+serviceInstance.getHost() + ":" + serviceInstance.getPort()+"/user/";
-        String user= restTemplate.getForObject(baseUrl+id,String.class);
+        //只需要填写服务名称就可以了
+        String url="http://user-service/user/";
+        String user=restTemplate.getForObject(url+id,String.class);
         return user;
     }
 }

@@ -12,7 +12,7 @@ public class UserController {
     private UserService userService;
     @GetMapping("/{id}")
     public User getUserById(@PathVariable("id") Long id){
-        System.out.println("我是user-service1");
+        System.out.println("我是user-service2");
     return userService.queryUserById(id);
     }
 }
