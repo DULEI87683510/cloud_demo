@@ -1,10 +1,4 @@
-package server; /**
- * @ClassName EurekaServerApplication
- * @Description TODO
- * @Author DL
- * @Date 2019/11/19 17:25
- * @Version 1.0
- */
+package server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

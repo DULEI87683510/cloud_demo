@@ -7,6 +7,7 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import user.feignclient.UserServiceFeignClient;
 
 
 /**
@@ -25,12 +26,15 @@ public class Uservice {
      */
     @Autowired
     private DiscoveryClient discoveryClient;
+    @Autowired
+    private UserServiceFeignClient  userServiceFeignClient;
     //申明一个失败回滚的方法
     @HystrixCommand(fallbackMethod="getUserByIdError")
     public String getUserById(Long id){
-        //只需要填写服务名称就可以了
+     /*   //只需要填写服务名称就可以了
         String url="http://user-service/user/";
-        String user=restTemplate.getForObject(url+id,String.class);
+        String user=restTemplate.getForObject(url+id,String.class);*/
+     String user=userServiceFeignClient.queryUserById(id);
         return user;
     }
     public String getUserByIdError(Long id){
