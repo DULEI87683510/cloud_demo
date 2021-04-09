@@ -15,6 +15,7 @@
         <module>eureka_server2</module>
         <module>user_service2</module>
         <module>zuuldemo</module>
+        <module>zuul_demo_2</module>
 
     </modules>
 

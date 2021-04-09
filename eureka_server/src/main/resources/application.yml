@@ -1,0 +1,130 @@
+server:
+  port: 8180
+  tomcat:
+    basedir:  ${tmp.dir:/opt/app}/data/temp/${spring.application.name}
+spring:
+  application:
+    name: "sae-eureka"
+eureka:
+  instance:
+    hostname: localhost
+    health-check-url-path: /actuator/health
+    status-page-url-path: /actuator/info
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    metadata-map: 
+      management: 
+        context-path: /actuator
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: ${defaultZone:http://${eureka.instance.hostname}:${server.port}/eureka/} 
+  server:
+    enable-self-preservation: false
+    peer-node-read-timeout-ms: 20000
+    peer-node-connect-timeout-ms: 5000
+info:
+  name: "APD_SAE_Eureka"
+  version: "1.2.0"
+  description: "sae eureka server"
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    jmx:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+    logfile:
+      enabled: true  
+      external-file:   ${log.dir:/opt/applog}\sae-eureka\SAE.sae-eureka.ALL.log
+       
+       
+---
+spring:
+  profiles: dev1
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+#      defaultZone: ${defaultZone:http://172.22.61.156:${server.port}/eureka/,http://172.22.61.157:${server.port}/eureka/} 
+      defaultZone: ${defaultZone:http://10.223.224.121:${server.port}/eureka/,http://10.223.224.122:${server.port}/eureka/} 
+  server:
+    enable-self-preservation: true  
+---
+spring:
+  profiles: dev2
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+#      defaultZone: ${defaultZone:http://172.22.61.155:${server.port}/eureka/,http://172.22.61.157:${server.port}/eureka/}
+      defaultZone: ${defaultZone:http://10.223.224.120:${server.port}/eureka/,http://10.223.224.122:${server.port}/eureka/}  
+  server:
+    enable-self-preservation: true  
+---
+spring:
+  profiles: dev3
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+#      defaultZone: ${defaultZone:http://172.22.61.155:${server.port}/eureka/,http://172.22.61.156:${server.port}/eureka/} 
+      defaultZone: ${defaultZone:http://10.223.224.120:${server.port}/eureka/,http://10.223.224.121:${server.port}/eureka/} 
+  server:
+    enable-self-preservation: true  
+---
+spring:
+  profiles: test1
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${defaultZone:http://10.221.136.197:${server.port}/eureka/,http://10.221.144.161:${server.port}/eureka/}
+  server:
+        enable-self-preservation: false
+        eviction-interval-timer-in-ms: 20000
+  cloud:
+      inetutils:
+        preferred-networks:10.221.144.161
+---
+spring:
+  profiles: test2
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${defaultZone:http://10.223.224.107:${server.port}/eureka/,http://10.223.224.109:${server.port}/eureka/} 
+---
+spring:
+  profiles: test3
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${defaultZone:http://10.223.224.107:${server.port}/eureka/,http://10.223.224.108:${server.port}/eureka/} 
+---
+spring:
+  profiles: product1
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${defaultZone:http://10.221.136.197:${server.port}/eureka/,http://10.221.144.161:${server.port}/eureka/} 
+  server:
+    enable-self-preservation: true
+  cloud:
+    inetutils:
+      preferred-networks:10.221.144.161
